@@ -3,7 +3,7 @@ import settings
 from colorama import Fore, Back, Style
 import state
 class Slider:
-    build_block  = Fore.WHITE+"\u2588"+Style.RESET_ALL
+    build_block  = Fore.LIGHTBLUE_EX+"\u2588"+Style.RESET_ALL
     width = int(settings.width)
     height = int(settings.height)
     def __init__(self):

@@ -58,7 +58,6 @@ class Powerup:
             state.dp_ball =  Ball.Ball()
         elif self.type==4:
             state.ball.invincinble  =  True
-
         elif self.type==5:
             state.ball.stickable=   True
 
@@ -66,7 +65,7 @@ class Powerup:
         if self.type==0:
             state.slider.changeLength(settings.board_length)
         elif self.type==1:
-            state.ball.speed  = [1,1]
+            state.ball.speed  = [state.ball.speed[0]//2,state.ball.speed[0]//2]
         elif self.type==2:
             state.slider.changeLength(settings.board_length)
         elif self.type==3:

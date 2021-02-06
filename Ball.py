@@ -25,12 +25,21 @@ class Ball:
         cnvs.canvas[self.pos[1]][self.pos[0]]=settings.build_block
     def update(self):
         bc  = state.bc
+        cnvs  = state.cnvs
+
         x = self.pos[0]+self.speed[0]
         y = self.pos[1]+self.speed[1]
         if x<0 or x>self.width-1:
             self.speed[0] = -1*self.speed[0]
+        
         if y<0 or y>self.height-1:
             self.speed[1] = -1*self.speed[1]
+        
+        if y>self.height-1:
+            cnvs.lives   -=1
+            if cnvs.lives==-1:
+                cnvs.gameover = True
+            
         if futils.ballSlidercollision(x,y,state.slider):
             self.speed[1] = -1*self.speed[1]
             if self.stickable==True:

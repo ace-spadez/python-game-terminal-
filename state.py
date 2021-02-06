@@ -9,3 +9,4 @@ ball = Ball.Ball()
 bc =  BrickComplex.BrickComplex()
 pus = powerup.Powerups()
 dp_ball  = None
+quit = False
