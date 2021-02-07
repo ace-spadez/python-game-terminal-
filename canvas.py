@@ -10,6 +10,7 @@ class Canvas:
     
     def __init__(self):
         self.canvas = np.array([[self.build_block for i in range(self.width)] for j in range(self.height)])
+        self.sidebar = np.array([[self.header_block for i in range(30)] for j in range(self.height)])
         self.center = np.array([[self.build_block for i in range(self.width)] for j in range(self.height)])
         self.header =  np.array([[self.header_block for i in range(int(self.width/2))] for j in range(3)])
         self.footer =  np.array([[self.header_block for i in range(int(self.width))] for j in range(1)])
@@ -59,6 +60,8 @@ class Canvas:
             for y  in  range(self.height):
                 for  x in range(self.width):
                     pr.append(self.canvas[y][x])
+                for x in range(30):
+                    pr.append(self.sidebar[y][x])
                 pr.append('\n')
         for y  in  range(1):
             for  x in range(self.width):

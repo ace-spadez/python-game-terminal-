@@ -11,6 +11,7 @@ class Powerup:
     width = int(settings.width)
     height = int(settings.height)
     types = ['🌟','🌠','🌙','💫','💖','📌']
+    type_names = ['Expand','Speed Up','Shorten','Double Ball','Break Thru','Ball Grab']
     # types = ['🌟','🌠','🌙','💫','💖','📌']
     def __init__(self,type,x,y):
         self.type = type
@@ -42,10 +43,11 @@ class Powerup:
         return 1
     def checkValidity(self):
         t =  time.time()
-        if t-self.time>5.0:
+        if t-self.time>10.0:
             self.detach()
+            
             return 0
-        return 1
+        return 10-t+self.time
     def attach(self):
         
         if self.type==0:
@@ -85,15 +87,32 @@ class Powerups:
 
     
     def  render(self):
+        cnvs= state.cnvs
         for powerup in self.active_powerups:
             powerup.render()
-        for  powerup in self.caught:
+
+        for y in range(cnvs.height):
+            for x in range(30):
+                cnvs.sidebar[y][x]=cnvs.header_block    
+        for  idx,powerup in enumerate(self.caught):
             rtn = powerup.checkValidity()
             if rtn==0:
                 self.caught.remove(powerup)
+            else:
+                type = powerup.type
+                typename =  powerup.type_names[type]
+                st = Fore.BLACK+Back.WHITE    +f'{typename} {int(rtn)}'+Style.RESET_ALL
+                
+                for index,ch in enumerate(st):
+                    cnvs.sidebar[idx+1][1+index] = ch
+
+
+            
     def  clear(self):
+        cnvs= state.cnvs
         for powerup in self.active_powerups:
             powerup.clear()
+        
     def update(self):
         for powerup in self.active_powerups:
             rtn = powerup.update()
